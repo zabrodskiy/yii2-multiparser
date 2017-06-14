@@ -16,9 +16,10 @@ class GetMultiContent extends Simple_html_dom{
         $this->url = $url;
         
         if(!is_array($this->url)){
-            $this->message("Not realized");
+            $this->message("initialization init_curl");
+            return $this->init_curl();
         }else{
-            $this->message("initialization multiparser");
+            $this->message("initialization init_multi_curl");
             return $this->init_multi_curl();
         }
     }
@@ -72,6 +73,7 @@ class GetMultiContent extends Simple_html_dom{
                 
                 if (curl_errno($easyHandle) == 0) {    //если файл/страница успешно получена
                     
+                    $this->message("response descriptor $easyHandle");
                     yield $this->load($result);
                     
                 }else{
@@ -87,20 +89,19 @@ class GetMultiContent extends Simple_html_dom{
         
         $ch = curl_init($this->url);
             
-            curl_setopt($ch[$i], CURLOPT_RETURNTRANSFER, 1);   
-            curl_setopt($ch[$i], CURLOPT_HEADER, 0); 
-            curl_setopt($ch[$i], CURLOPT_FOLLOWLOCATION, 1);
-            curl_setopt($ch[$i], CURLOPT_ENCODING, "deflate"); 
-            curl_setopt($ch[$i], CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36');
-            curl_setopt($ch[$i], CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($ch[$i], CURLOPT_TIMEOUT, 30);
-            curl_setopt($ch[$i], CURLOPT_MAXREDIRS, 10); 
-            curl_setopt($ch[$i], CURLOPT_REFERER, 'https://www.google.com.ua/');
-            curl_setopt($ch[$i], CURLOPT_SSL_VERIFYHOST,0);
-            curl_setopt($ch[$i], CURLOPT_SSL_VERIFYPEER,0);
-            curl_setopt($ch[$i], CURLOPT_COOKIEJAR, Yii::getAlias($this->cookies_path));  
-            curl_setopt($ch[$i], CURLOPT_COOKIEFILE, Yii::getAlias($this->cookies_path)); 
-            curl_multi_add_handle($mh, $ch[$i]);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);   
+            curl_setopt($ch, CURLOPT_HEADER, 0); 
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt($ch, CURLOPT_ENCODING, "deflate"); 
+            curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36');
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+            curl_setopt($ch, CURLOPT_MAXREDIRS, 10); 
+            curl_setopt($ch, CURLOPT_REFERER, 'https://www.google.com.ua/');
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,0);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,0);
+            curl_setopt($ch, CURLOPT_COOKIEJAR, Yii::getAlias($this->cookies_path));  
+            curl_setopt($ch, CURLOPT_COOKIEFILE, Yii::getAlias($this->cookies_path));
             
         $contents = curl_exec($ch);
         $err = curl_errno($ch);
