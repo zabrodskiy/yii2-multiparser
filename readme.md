@@ -1,7 +1,7 @@
 Yii2 Multiparser
 ================
 Минимальные требования: php 7
-Универсальна библиотека для парсинга и обработки контента с различных сайтов. Multiparser использует как и обычную загрузку через curl, так и мульти - загрузку multicurl, а также использует популярную библиотеку php simple dom parser  (официальный сайт с документацией -  http://simplehtmldom.sourceforge.net/manual.htm ) для обработки полученных данных.
+Универсальна библиотека для парсинга и обработки контента с различных сайтов. Multiparser использует как  обычную загрузку через curl, так и мульти - загрузку multicurl, а также использует популярную библиотеку php simple dom parser  (официальный сайт с документацией -  http://simplehtmldom.sourceforge.net/manual.htm ) для обработки полученных данных.
 Использование:
 
 1. Добавляем компонент в конфигурацию консольных комманд фреймворка Yii2:
@@ -33,11 +33,18 @@ class ParserController extends \yii\console\Controller{
             'http://rozetka.com.ua/lenovo_80r20069ua/p5905617/',
             'http://rozetka.com.ua/acer_nx_gceeu_098/p13716558/'
         ]; 
-        
+        /**
+         *  GetMultiContent->init($url) инициализирует парсер, принимает два параметра:
+         *  $url type string - ссылки парсируемых сайтов, если передать массив отработает мультизагрузчик
+         *  если строку отработает обычный загрузчик
+         *  $no_parser type boolean - true, не создавать объект Simple_html_dom контент для обработки контента
+         *  и вернет строку, false, создасть объект автоматически (по умолчанию false)
+         */
         foreach(Yii::$app->multiparser->init($url) as $teg){
             
-            foreach($teg->find('a') as $atribut) //обработка библиотекой hp simple dom parser        (официальный сайт с документацией -  http://simplehtmldom.sourceforge.net/manual.htm )
+            foreach($teg->find('a') as $atribut) //обработка библиотекой php simple dom parser        (официальный сайт с документацией -  http://simplehtmldom.sourceforge.net/manual.htm )
                 echo $atribut->href . "\n";
+                echo Yii::$app->multiparser->info; //URL возвращаемого дескриптора
         }
     }
 }
@@ -55,7 +62,13 @@ class ParserController extends \yii\console\Controller{
     public function actionIndex(){
 
         $url = 'http://rozetka.com.ua/prestigio_smartbook_141a03_psb141a03bfw_mb_cis/p12467569/';  
-
+        /**
+         *  GetMultiContent->init($url) инициализирует парсер, принимает два параметра:
+         *  $url type string - ссылки парсируемых сайтов, если передать массив отработает мультизагрузчик
+         *  если строку отработает обычный загрузчик
+         *  $no_parser type boolean - true, не создавать объект Simple_html_dom контент для обработки контента
+         *  и вернет строку, false, создасть объект автоматически (по умолчанию false)
+         */
         $html = Yii::$app->multiparser->init($url);
 
             foreach($html->find('a') as $element) 
