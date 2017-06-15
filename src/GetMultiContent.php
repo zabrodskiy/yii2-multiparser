@@ -32,7 +32,7 @@ class GetMultiContent extends Simple_html_dom{
     /**
      * не ипользовать объект Simple_html_dom для обработки контента
      */
-    public $no_parser;
+    public $no_parser = false;
     
 
     public function init($url, $no_parser = false) {
@@ -106,6 +106,7 @@ class GetMultiContent extends Simple_html_dom{
                             $this->info = $key;
                         }
                     }
+                    
                     ($this->no_parser) ? yield ($result) : yield ($this->load($result));
                     
                 }else{
