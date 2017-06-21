@@ -19,7 +19,7 @@ Yii2 Multiparser
 
 ### 2.Загрузка с высокой скоростью контента используя multicurl. Создаем контроллер консольной комманды фреймворка Yii2:
 
-~~~
+```
 <?php
 namespace app\commands;
 use Yii;
@@ -50,7 +50,7 @@ class ParserController extends \yii\console\Controller{
         }
     }
 }
-~~~
+```
 
 3. Загрузка в обычном режиме используя curl и разработку консольных команд фреймворка Yii2: 
 
