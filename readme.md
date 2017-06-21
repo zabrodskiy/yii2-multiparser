@@ -52,7 +52,7 @@ class ParserController extends \yii\console\Controller{
 }
 ```
 
-### 3. Загрузка в обычном режиме используя curl и разработку консольных команд фреймворка Yii2: 
+### 3. Загрузка в обычном режиме: 
 
 ```
 <?php
