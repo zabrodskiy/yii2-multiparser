@@ -36,7 +36,7 @@ class ParserController extends \yii\console\Controller{
             'http://rozetka.com.ua/acer_nx_gceeu_098/p13716558/'
         ]; 
         /**
-         *  GetMultiContent->init($url) инициализирует парсер, принимает два параметра:
+         *  GetMultiContent->init($url, $no_parser = false) инициализирует парсер, принимает два параметра:
          *  $url type string - ссылки парсируемых сайтов, если передать массив отработает мультизагрузчик
          *  если строку отработает обычный загрузчик
          *  $no_parser type boolean - true, не создавать объект Simple_html_dom контент для обработки контента
