@@ -34,6 +34,12 @@ class GetMultiContent extends Simple_html_dom{
      */
     public $no_parser = false;
     
+    /**
+     * Номер ошибки ответа CURL
+     * @var type int
+     */
+    public $err;
+    
 
     public function init($url, $no_parser = false) {
         
@@ -97,6 +103,7 @@ class GetMultiContent extends Simple_html_dom{
                 
                 $easyHandle = $info['handle'];    
                 $result = curl_multi_getcontent($easyHandle);
+                $this->err = curl_errno($easyHandle);
                 
                 if (curl_errno($easyHandle) == 0) {    
                     
@@ -137,12 +144,12 @@ class GetMultiContent extends Simple_html_dom{
             curl_setopt($ch, CURLOPT_COOKIEFILE, Yii::getAlias($this->cookies_path));
             
         $contents = curl_exec($ch);
-        $err = curl_errno($ch);
+        $this->err = curl_errno($ch);
         $errmsg  = curl_error($ch);
       
         curl_close($ch);
         
-        if($err == 0){
+        if($this->err == 0){
             return ($this->no_parser) ? $contents : $this->load($contents);
         }else{
             $this->message($errmsg);
