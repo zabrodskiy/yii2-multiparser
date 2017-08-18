@@ -153,6 +153,7 @@ class GetMultiContent extends Simple_html_dom{
             return ($this->no_parser) ? $contents : $this->load($contents);
         }else{
             $this->message($errmsg);
+            return FALSE;
         } 
     }
     
