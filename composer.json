@@ -9,7 +9,7 @@
             "email": "zabrodskiy33@qmail.com"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=7.0.0"
     },
