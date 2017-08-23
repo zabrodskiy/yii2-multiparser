@@ -1,7 +1,6 @@
 {
     "name": "zabrodskiy/yii2-multiparser",
     "description": "universal parser for multicasting and content processing",
-    "version": "1.0.0",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -10,7 +9,6 @@
             "email": "zabrodskiy33@qmail.com"
         }
     ],
-    "minimum-stability": "stable",
     "require": {
         "php": ">=7.0.0"
     },
